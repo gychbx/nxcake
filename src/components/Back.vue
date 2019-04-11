@@ -5,7 +5,7 @@
             <div style="width:216px">
                 <img src="../../static/logo_new.png" alt="">
             </div>
-            <p style="font-size: 18px;line-height: 20px;">找回密码</p>
+            <p style="font-size: 18px;line-height: 20px;"></p>
         </div>
     </div>
     <div class="main">
