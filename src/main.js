@@ -4,17 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/index.css';
+import Vuex from 'vuex';
+Vue.use(Vuex);
 Vue.use(ElementUI);
-import axios from 'axios'
-import Vueaxios from 'vue-axios'
-Vue.use(Vueaxios, axios)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
