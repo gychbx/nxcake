@@ -35,6 +35,7 @@
             successFunction(){
                 this.confirmSuccess = true
                 this.confirmWords = '验证通过';
+                this.$emit("asd",this.confirmSuccess)
                 if(window.addEventListener){
                     document.getElementsByTagName('html')[0].removeEventListener('mousemove',this.mouseMoveFn);
                     document.getElementsByTagName('html')[0].removeEventListener('mouseup',this.moseUpFn);

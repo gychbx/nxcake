@@ -22,7 +22,14 @@
             <p style="text-align: center;color: #949494;font-size:12px;margin-bottom:24px">提示：忘记用户名？试试您的常用邮箱或手机号，如依然无法解决，请咨询客服：4001-578-578</p>
             <input type="text" class="input" maxlength="50" id="userName" @focus="focus" v-model="id" placeholder="用户名/手机号/邮箱" data-error="请输入用户名">
             <div style="height:24px;width:250px;margin:0 auto;text-align: left;text-indent: 24px;font-size: 12px;color: #ff0000;line-height: 24px;">{{user}}</div >
-            <slider style="width:250px;margin:0 auto" @asd="change"></slider>
+            
+            <div class="box">
+                <slider style="width:250px;margin:0 auto" @asd="change"></slider>
+                <div>
+
+                </div>
+                <div></div>
+            </div>
             <button class="btn" @click="click">下一步</button>
         </div>
     </div>
@@ -94,6 +101,7 @@ import Slider from "./Slider"
         background-position: 0 45%;
     }
     .btn {
+        cursor: pointer;
         margin-top: 60px;
         border: none;
         outline: none;
@@ -106,8 +114,10 @@ import Slider from "./Slider"
     }
     .el-step {
         width: 150px;
-  
         height: 20px
+    }
+    .box {
+        position: absolute
     }
     
 </style>
