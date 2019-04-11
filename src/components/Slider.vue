@@ -27,6 +27,9 @@
                     this.mouseMoveStata = true;
                     this.beginClientX = e.clientX;
                 }
+                if(this.confirmSuccess==true){
+                    this.$emit("asd",this.confirmSuccess)
+                }
     
             },        //mousedoen 事件
             successFunction(){
