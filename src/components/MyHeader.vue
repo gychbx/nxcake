@@ -36,7 +36,7 @@
                         <li v-for="(item,index) in list1" :key='(item,index)'>{{item}}</li>
                    </ul>
                    <ul v-else-if="index===5" class='hoverdiv'>
-                        <li v-for="(item,index) in list2" :key='(item,index)'>{{item}}</li>
+                        <li v-for="(item,index) in list2" @click='tonewpage(index)' :key='(item,index)'>{{item}}</li>
                    </ul>
                 </li>
             </ul>
@@ -104,6 +104,11 @@ export default {
     },
     handlesearch2:function(){
           this.showinput=true;
+    },
+    tonewpage:function(index){
+          if(index===0){
+            this.$router.push('/aha');
+          }
     }
   },
   mounted:function(){

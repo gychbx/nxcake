@@ -6,6 +6,7 @@ import MyHome from '@/components/MyHome'
 import MyCake from '@/components/MyCake'
 import MyBread from '@/components/MyBread'
 import MyGift from '@/components/MyGift'
+import Myaha from '@/components/Myaha'
 export default new Router({
   routes: [
       {
@@ -32,6 +33,11 @@ export default new Router({
         path:'/gift',
         name:'MyGift',
         component:MyGift
+      },
+      {
+        path:'/aha',
+        name:'Myaha',
+        component:Myaha
       },
       {
         path:'/company',
