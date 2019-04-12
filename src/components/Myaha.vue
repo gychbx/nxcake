@@ -191,7 +191,7 @@ export default {
 <style scoped>
    .main {
     background: #f4f4f4;
-    width: 63.059%;
+    width: 1200px;
     margin: auto;
     padding: 20px;
     
@@ -291,7 +291,7 @@ export default {
    }
    .right2 {
        width: 40%;
-           padding: 19px 0 20px 0;
+        padding: 19px 0 20px 0;
    }
    .bottom {
        padding-top: 10px;
@@ -316,6 +316,7 @@ export default {
         float: left;
         padding: 19px;
    }
+   
    .pic {
         width:260px;
         height:260px;
@@ -327,6 +328,7 @@ export default {
    .p_item_new:hover {
        background: pink;
    }
+
    .li_bottom {
         padding-top: 10px;
         text-align: center;

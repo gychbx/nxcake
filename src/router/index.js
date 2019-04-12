@@ -7,6 +7,7 @@ import MyCake from '@/components/MyCake'
 import MyBread from '@/components/MyBread'
 import MyGift from '@/components/MyGift'
 import Myaha from '@/components/Myaha'
+import Reg2 from '@/components/Reg2'
 export default new Router({
   routes: [
       {
@@ -38,6 +39,11 @@ export default new Router({
         path:'/aha',
         name:'Myaha',
         component:Myaha
+      },
+      {
+        path:'/reg2',
+        name:'Reg2',
+        component:Reg2
       },
       {
         path:'/company',

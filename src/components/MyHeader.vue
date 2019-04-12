@@ -108,6 +108,8 @@ export default {
     tonewpage:function(index){
           if(index===0){
             this.$router.push('/aha');
+          }else if(index==1){
+            this.$router.push('/reg2');
           }
     }
   },
