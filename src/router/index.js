@@ -43,33 +43,33 @@ export default new Router({
         path:'/company',
         name:'MyHome',
         component:MyHome,
-        // chlidren:[
-        //   {
-        //     path: '/',
-        //     name: 'Contentcaigou',
-        //     component: Contentcaigou
-        //   },
-        //   {
-        //     path: '/client',
-        //     name: 'Client',
-        //     component: Client
-        //   },
-        //   {
-        //     path: '/weal',
-        //     name: 'Weal',
-        //     component: Weal
-        //   },
-        //   {
-        //     path: '/cooperate',
-        //     name: 'Cooperate',
-        //     component: Cooperate
-        //   },
-        //   {
-        //     path: '/food',
-        //     name: 'Food',
-        //     component: Food
-        //   }
-        // ]
+      //   chlidren:[
+      //     {
+      //       path: '/',
+      //       name: 'Contentcaigou',
+      //       component: Contentcaigou
+      //     },
+      //     {
+      //       path: '/client',
+      //       name: 'Client',
+      //       component: Client
+      //     },
+      //     {
+      //       path: '/weal',
+      //       name: 'Weal',
+      //       component: Weal
+      //     },
+      //     {
+      //       path: '/cooperate',
+      //       name: 'Cooperate',
+      //       component: Cooperate
+      //     },
+      //     {
+      //       path: '/food',
+      //       name: 'Food',
+      //       component: Food
+      //     }
+      //   ]
       },
       {
         path:'/mynx',
