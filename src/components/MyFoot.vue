@@ -100,7 +100,7 @@ export default {
         height: 40px;
     }
     .footer_tel p {
-        width: 14.8%;
+        width: 20%;
         margin: 0 auto;
        padding-left: 30px;
         height: 40px;
