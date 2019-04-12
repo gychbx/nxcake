@@ -33,7 +33,7 @@
                 <li v-for='(item,index) in arr' :key='(item,index)' :style='active===index?mystyle1:""'>
                    <router-link @click.native='change(index)' :style='active===index?mystyle2:""' class='link' :to='item.two'>{{item.one}}</router-link>
                    <ul v-if='index===4' class='hoverdiv'>
-                        <li v-for="(item,index) in list1" :key='(item,index)'>{{item}}</li>
+                        <li v-for="(item,index) in list1"  @click='tonewpage2(index)' :key='(item,index)'>{{item}}</li>
                    </ul>
                    <ul v-else-if="index===5" class='hoverdiv'>
                         <li v-for="(item,index) in list2" @click='tonewpage(index)' :key='(item,index)'>{{item}}</li>
@@ -110,6 +110,19 @@ export default {
             this.$router.push('/aha');
           }else if(index==1){
             this.$router.push('/reg2');
+          }
+    },
+    tonewpage2:function(index){
+          if(index===0){
+            this.$router.push('/caigou');
+          }else if(index==1){
+            this.$router.push('/kehu');
+          }else if(index==2){
+            this.$router.push('/fuli');
+          }else if(index==3){
+            this.$router.push('/hezuo');
+          }else if(index==4){
+            this.$router.push('/smallfood');
           }
     }
   },
