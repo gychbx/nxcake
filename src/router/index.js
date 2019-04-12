@@ -9,6 +9,7 @@ import MyGift from '@/components/MyGift'
 import Myaha from '@/components/Myaha'
 import Reg2 from '@/components/Reg2'
 import Shouye from '@/components/Shouye'
+import Back from '@/components/Back'
 export default new Router({
   routes: [
       {
@@ -63,6 +64,11 @@ export default new Router({
         path:'/reg2',
         name:'Reg2',
         component:Reg2
+      },
+      {
+        path:'/back',
+        name:'Back',
+        component:Back
       },
   ]
 })

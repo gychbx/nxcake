@@ -22,7 +22,7 @@
 
         <div style=" text-align: center;" v-if="page==1">
             <p style="text-align: center;color: #949494;font-size:12px;margin-bottom:24px">提示：忘记用户名？试试您的常用邮箱或手机号，如依然无法解决，请咨询客服：4001-578-578</p>
-            <input type="text" class="input" maxlength="50" id="userName" @focus="focus" v-model="id" placeholder="用户名/手机号/邮箱" data-error="请输入用户名">
+            <input type="text" class="input" maxlength="50" id="userName" @focus="focus" v-model="obj.id" placeholder="用户名/手机号/邮箱" data-error="请输入用户名">
             <div style="height:24px;width:250px;margin:0 auto;text-align: left;text-indent: 24px;font-size: 12px;color: #ff0000;line-height: 24px;">{{user}}</div >
                 <div class="box">
                     <slider style="width:250px;margin:0 auto" @asd="change"></slider>
@@ -122,7 +122,12 @@ import Slider from "./Slider"
                 ac:false,
                 ac1:false,
                 a:true,
-                id:"",
+                obj:{
+                    id:""
+                },
+                mydata:"",
+                
+
                 user:"",
                 user1:"*请输入用户名",
                 user2:"*请拖动滑块完成验证",
@@ -132,17 +137,41 @@ import Slider from "./Slider"
         },
         methods:{
             click: function(){
-                if(this.id==""){
+                if(this.obj.id==""){
                     this.user=this.user1
-                }else if(!(/^1(3|4|5|7|8)\d{9}$/.test(this.id))){
+                }else if(!(/^1(3|4|5|7|8)\d{9}$/.test(this.obj.id))){
                      this.user=this.user4
                 }
                 else if(this.a!=false){
                     this.user=this.user2
                 }else {
-                    this.index=1
-                    this.page=2
+                    this.one();
+                   
                 }
+            },
+            one:function(){
+                 this.axios.post("http://localhost:9999/one.do", this.obj, {
+						transformRequest: [
+							function(data) {
+								let params = '';
+								for(let index in data) {
+									params += index + "=" + data[index] + "&";
+								}
+								return params;
+							}
+						]
+					}).then(response => {
+                        console.log("post发送Ajax请求成功", response.data);
+                        if(response.data=="no"){
+                            alert("用户不存在")
+                        }else {
+                            this.mydata = response.data;
+                            this.index=1
+                            this.page=2
+                        }
+					}).catch(response => {
+						console.log("post发送Ajax请求失败");
+					})
             },
             click2:function(){
                 this.page=3

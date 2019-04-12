@@ -39,11 +39,11 @@
 
                     <div class="tab tab_account" v-else>
                         <p class="input_wrap username_wrap">
-                            <input type="text" maxlength="50" title="email/手机号" v-model="usename"  @focus="change" placeholder="请输入账号" autocomplete="off">
+                            <input type="text" maxlength="50" title="email/手机号" v-model="zhanghao.usename"  @focus="change" placeholder="请输入账号" autocomplete="off">
                             <span class="error_message" >{{id}}</span>
                         </p>
                         <p class="input_wrap password_wrap">
-                            <input type="password" maxlength="50" title="密码"  v-model="password"  @focus="change" placeholder="请输入密码">
+                            <input type="password" maxlength="50" title="密码"  v-model="zhanghao.password"  @focus="change" placeholder="请输入密码">
                             <span class="error_message" >{{pwd}}</span>
                         </p>
                     </div>
@@ -82,7 +82,7 @@
 
                     <div class="tab_mobile" >
                         <p class="input_wrap username_wrap">
-                            <input type="text" maxlength="11" title="手机号码" class="phone"  @focus="change" v-model="telphone" placeholder="手机号码">
+                            <input type="text" maxlength="11" title="手机号码" class="phone"  @focus="change" v-model="usertel.telphone2" placeholder="手机号码">
                             <span class="error_message" >{{tel}}</span>
                         </p>
 
@@ -116,12 +116,12 @@
                         </div>
 
                          <p class="input_wrap yzm_wrap">
-                            <input type="text" maxlength="6" title="短信验证码" @focus="change" v-model="dxyzm"  placeholder="短信验证码">
+                            <input type="text" maxlength="6" title="短信验证码" @focus="change" v-model="dxyzm2"  placeholder="短信验证码">
                             <button v-show="show2" class="code_btn"  @click="yanzheng2">发送验证码</button>
                             <button v-show="!show2" class="code_btn count" disabled >{{count2}} s后重试</button>
-                            <span class="error_message" >{{duanxin}}</span>
+                            <span class="error_message" >{{dx}}</span>
                         </p>
-                         <button class="btn" @click="reg">立即注册</button>
+                         <button class="btn" @click="tianjia">立即注册</button>
                         <p class="clear_fix bottom_link two" >
                             <input type="checkbox" id="rule" v-model="a">
                             <label for="rule">我已阅读并同意<a href="/shop/help-41.html" target="_blank">《诺心lecake用户服务协议》</a></label>
@@ -161,8 +161,16 @@ import { constants } from 'os';
                 show2:true,
                 ac:1,
                 telphone:"",
+                usertel:{
+                    telphone2:"",
+                },
+                zhanghao:{
+                    usename:"",
+                    password:""
+                },
                 yanzhengma:"",
                 dxyzm:"",
+                dxyzm2:"",
                 tel:"",
                 tel1:"手机号码不能为空",
                 tel2:"手机号码格式不正确",
@@ -172,9 +180,13 @@ import { constants } from 'os';
                 yzm2:"",        
                 duanxin:"",
                 duanxin1:"请输入短信验证码",
-                duanxin2:"",          
-                usename:"",
-                password:"",
+                duanxin2:"",   
+                
+                dx:"",
+                dx1:"请输入短信验证码",
+                dx2:"",    
+                
+                
                 id:"",
                 id1:"用户名不能为空",
                 id2:"用户名格式不正确",
@@ -188,7 +200,10 @@ import { constants } from 'os';
                 count2:"",
                 mystyle :{
                     color: "#fe4320"
-                }
+                },
+                mydata:"",
+                 mydata2:"",
+                 mydata3:""
             }
         },
         methods: {
@@ -201,6 +216,63 @@ import { constants } from 'os';
                 }
                
             },
+            select:function(){
+                this.axios.get("http://localhost:9999/reg.do",{
+					
+					}).then(response => {
+						console.log("get发送Ajax请求成功", response.data);
+						this.mydata = response.data;
+					}).catch(response => {
+						console.log("get发送Ajax请求失败");
+					})
+            },
+            insert:function(){
+                this.axios.post("http://localhost:9999/insert.do", this.usertel, {
+						transformRequest: [
+							function(data) {
+								let params = '';
+								for(let index in data) {
+									params += index + "=" + data[index] + "&";
+								}
+								return params;
+							}
+						]
+					}).then(response => {
+                        console.log("post发送Ajax请求成功", response.data);
+                        if(response.data=="no"){
+                            alert("账号已存在")
+                        }else {
+                            this.mydata2 = response.data;
+                            this.$router.push("/")
+                        }
+					}).catch(response => {
+						console.log("post发送Ajax请求失败");
+					})
+            },
+            chaxun:function(){
+                this.axios.post("http://localhost:9999/chaxun.do", this.zhanghao, {
+						transformRequest: [
+							function(data) {
+								let params = '';
+								for(let index in data) {
+									params += index + "=" + data[index] + "&";
+								}
+								return params;
+							}
+						]
+					}).then(response => {
+                        console.log("post发送Ajax请求成功", response.data);
+                        if(response.data=="no"){
+                            alert("账号或密码错误")
+                        }else {
+                            this.mydata3 = response.data;
+                            this.$router.push("/")
+                        }
+					}).catch(response => {
+						console.log("post发送Ajax请求失败");
+					})
+            },
+
             yanzheng: function () {
                 if(this.telphone==""){
                     this.tel=this.tel1
@@ -211,21 +283,23 @@ import { constants } from 'os';
                 }else if(this.yanzhengma!="zzzz"){
                     alert("验证码错误，请重新输入")
                     this.yanzhengma="";
-                }else if(this.yanzhengma=="zzzz"){
+                }else {
                     //发送验证码
                       this.getCode()
+                      this.select()
                 } 
             },
             yanzheng2:function(){
-                if(this.telphone==""){
+                if(this.usertel.telphone2==""){
                     this.tel=this.tel1
-                }else if(!(/^1[34578]\d{9}$/.test(this.telphone))){ 
+                }else if(!(/^1[34578]\d{9}$/.test(this.usertel.telphone2))){ 
                     this.tel=this.tel2 
                 }else if(this.btn==false){
                     this.q=this.q1;
                 }else {
                      //发送验证码
                     this.getCode2()
+                    this.select()
                 }
                
             },
@@ -269,25 +343,44 @@ import { constants } from 'os';
                             this.tel=this.tel2 
                         }else if(this.dxyzm==""){
                             this.duanxin=this.duanxin1
-                        }else if(this.dxyzm!="zzzz"){
+                        }else if(this.dxyzm!=this.mydata){
                             alert("手机验证码错误")
                         }else {
-                             //跳转
+                            this.$router.push("/")
                         }
                 }else if(this.ac==2){
-                    if(this.usename==""){
+                    if(this.zhanghao.usename==""){
                             this.id=this.id1
-                        }else if(!(/^1[34578]\d{9}$/.test(this.usename))){ 
+                        }else if(!(/^1[34578]\d{9}$/.test(this.zhanghao.usename))){ 
                             this.id=this.id2 
-                        }else if(this.password==""){
+                        }else if(this.zhanghao.password==""){
                             this.pwd=this.pwd1
-                        }else if(!(/^[0-9A-Za-z]{6,20}$/.test(this.password))){
+                        }else if(!(/^[0-9A-Za-z]{6,20}$/.test(this.zhanghao.password))){
                             alert("密码只能是6-30位英文、数字及“_”、“-”组成")
                         }else {
                             //跳转
+                            this.chaxun()
                         }
                 }
               
+            },
+            tianjia:function(){
+                console.log(this.mydata)
+                if(this.usertel.telphone2==""){
+                    this.tel=this.tel1
+                }else if(!(/^1[34578]\d{9}$/.test(this.usertel.telphone2))){ 
+                    this.tel=this.tel2 
+                }else if(this.btn==false){
+                    this.q=this.q1;
+                }else if(this.dxyzm2==""){
+                    this.dx=this.dx1
+                }
+                else if(this.dxyzm2!=this.mydata){
+                     alert("手机验证码错误")
+                }else if(this.a==true){
+                    this.insert()
+                }
+
             },
             return1:function(){
                 this.page=true
@@ -301,6 +394,7 @@ import { constants } from 'os';
                 this.duanxin=this.duanxin2;
                 this.id=this.id3;
                 this.pwd=this.pwd2;
+                this.dx=this.dx2
             },
             change2:function(e){
                 this.box=true
