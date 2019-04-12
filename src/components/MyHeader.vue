@@ -110,6 +110,8 @@ export default {
             this.$router.push('/aha');
           }else if(index==1){
             this.$router.push('/reg2');
+          }else if(index==2){
+            this.$router.push('/back');
           }
     },
     tonewpage2:function(index){

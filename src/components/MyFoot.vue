@@ -77,7 +77,6 @@ export default {
         cursor: pointer;
     }
     .wx_btn {
-        width: 100px;
         height: 18px;
         padding-top: 36px;
         background: url(../assets/wx.png);
@@ -100,7 +99,6 @@ export default {
         height: 40px;
     }
     .footer_tel p {
-        width: 20%;
         margin: 0 auto;
        padding-left: 30px;
         height: 40px;
