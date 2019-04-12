@@ -9,16 +9,13 @@ import MyGift from '@/components/MyGift'
 import Myaha from '@/components/Myaha'
 import Reg2 from '@/components/Reg2'
 import Shouye from '@/components/Shouye'
-<<<<<<< HEAD
 import Caigou from '@/components/Caigou'
 import Kehu from '@/components/Kehu'
 import Fuli from '@/components/Fuli'
 import Hezuo from '@/components/Hezuo'
 import Smallfood from '@/components/Smallfood'
-
-=======
 import Back from '@/components/Back'
->>>>>>> d0444730a6d298ca89aeb39a3d0ed535f3d56e9b
+
 export default new Router({
   routes: [
       {
@@ -73,9 +70,8 @@ export default new Router({
         path:'/reg2',
         name:'Reg2',
         component:Reg2
-      },
-      {
-<<<<<<< HEAD
+      }, {
+
         path:'/caigou',
         name:'Caigou',
         component:Caigou
