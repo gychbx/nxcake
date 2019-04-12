@@ -7,12 +7,13 @@
         </div>
         <div class="main">
             <div class="banner_link">
-                <div class="login_wrap">
+
+                <div class="login_wrap" v-if="page">
                     <div class="clear_fix tab_title">
-                        <div class="f_left" @click="click"  data-id="1" :style="[ac==1&&ab==1?mystyle:'']">{{f_left}}</div>
+                        <div class="f_left" @click="click"  data-id="1" :style="[ac==1?mystyle:'']">手机验证登录</div>
                         <div class="f_right">
                             <span>|</span>
-                            <span @click="click" data-id="2" :style="[ac==2?mystyle:'']"  v-html="f_right"></span>
+                            <span @click="click" data-id="2" :style="[ac==2?mystyle:'']" >账户密码登录</span>
                         </div>
                     </div>
                     
@@ -21,24 +22,17 @@
                             <input type="text" maxlength="11" title="手机号码" class="phone"  @focus="change" v-model="telphone" placeholder="手机号码">
                             <span class="error_message" >{{tel}}</span>
                         </p>
-                        <p class="input_wrap yzm_wrap" v-if="huakuai">
+                        <p class="input_wrap yzm_wrap">
                             <input type="text" maxlength="6" class="yzm" title="验证码"  @focus="change" v-model="yanzhengma" placeholder="请输入验证码">
                             <img src="https://www.lecake.com/customer/captcha.html?w=80&h=30&offset=2&v=0.33357310319231614" alt=""> 
                             <span>换一个</span> 
                             <span class="error_message" >{{yzm}}</span>
                         </p>
-
-                        <div style="height:56px" v-else>
-                            <slider></slider>
-                            <span class="error_message">{{q}}</span>
-                        </div>
                          <p class="input_wrap yzm_wrap">
                             <input type="text" maxlength="6" title="短信验证码" @focus="change" v-model="dxyzm"  placeholder="短信验证码">
-                            <!-- <button class="code_btn"  @click="yanzheng">{{count}}</button> -->
-
-                            <button v-show="show" class="code_btn"  @click="yanzheng">获取验证码</button>
+                        
+                            <button v-show="show" class="code_btn"  @click="yanzheng">发送验证码</button>
                             <button v-show="!show" class="code_btn count" disabled >{{count}} s后重试</button>
-    
                             <span class="error_message" >{{duanxin}}</span>
                         </p>
                     </div>
@@ -58,7 +52,7 @@
                     <button class="btn" @click="login">立即登录</button>
 
 
-                    <div v-if="huakuai">
+                    <div>
                         <div class="clear_fix bottom_link" >
                             <router-link   class="link_1"   to="/forget">忘记密码</router-link>
                             <div>
@@ -75,15 +69,67 @@
                             <img src="../../static/qq.png" alt="">
                         </div>
                     </div>
-
-                    <p class="clear_fix bottom_link two" v-else>
-                        <input type="checkbox" id="rule" v-model="a">
-                        <label for="rule">我已阅读并同意<a href="/shop/help-41.html" target="_blank">《诺心lecake用户服务协议》</a></label>
-                        <span class="error_message" v-if="!a">用户服务协议未勾选</span>
-                    </p>
                 </div>
 
-                
+                <div class="register_wrap" v-else>
+                    <div class="clear_fix tab_title">
+                        <div class="f_left">手机快捷注册</div>
+                        <div class="f_right">
+                            <span>|</span>
+                            <span>已有账号？<i style='color: #fe4320;font-style: normal' data-id='10' @click="return1">请登录</i></span>
+                        </div>
+                    </div>
+
+                    <div class="tab_mobile" >
+                        <p class="input_wrap username_wrap">
+                            <input type="text" maxlength="11" title="手机号码" class="phone"  @focus="change" v-model="telphone" placeholder="手机号码">
+                            <span class="error_message" >{{tel}}</span>
+                        </p>
+
+                        <div style="height:56px;position: relative;">
+                            <slider @asd="change2"></slider>
+                            <div class="abso" v-if="box">
+                                <div class="boxchild">
+                                            <div class="left">
+                                                请在下方输入验证码
+                                            </div>
+                                            <div class="right">
+                                                <i class="el-icon-warning" style="color:red;line-height:32px;font-size:20px"></i>
+                                            </div>
+                                        </div>
+                                        <div class="yanzhen">
+                                            <div style="height:42px;display: flex;align-items: center;justify-content: space-between;">
+                                                <input  maxlength="6" v-model="yzm2" type="text" style="width:90px;height:30px;border: 1px solid #949494;margin-left:5px">
+                                                <i class="el-icon-refresh" style="font-size:22px"></i>
+                                            </div>
+                                            <img src="../../static/yzm.jpg" alt="">
+                                            <div style="font-size: 12px;color: #999;text-align: left;padding-bottom:10px" v-if="box1">
+                                                <i class="el-icon-error" style="color:red; font-size:16px;text-indent: 10px"></i>
+                                                验证码输入错误，请重新输入
+                                            </div>
+                                            <div class="bb" @click="tijiao">
+                                                提交
+                                            </div>
+                                        </div>
+                            </div>
+                            <span class="error_message">{{q}}</span>
+                        </div>
+
+                         <p class="input_wrap yzm_wrap">
+                            <input type="text" maxlength="6" title="短信验证码" @focus="change" v-model="dxyzm"  placeholder="短信验证码">
+                            <button v-show="show2" class="code_btn"  @click="yanzheng2">发送验证码</button>
+                            <button v-show="!show2" class="code_btn count" disabled >{{count2}} s后重试</button>
+                            <span class="error_message" >{{duanxin}}</span>
+                        </p>
+                         <button class="btn" @click="reg">立即注册</button>
+                        <p class="clear_fix bottom_link two" >
+                            <input type="checkbox" id="rule" v-model="a">
+                            <label for="rule">我已阅读并同意<a href="/shop/help-41.html" target="_blank">《诺心lecake用户服务协议》</a></label>
+                            <span class="error_message" v-if="!a">用户服务协议未勾选</span>
+                        </p>
+                    </div>
+                    
+                </div>
                 
             </div>
         </div>
@@ -96,66 +142,50 @@
 import Slider from "./Slider"
 import { constants } from 'os';
 	export default {
-        name:"Reg",
+        name:"Reg2",
         components:{
             "slider":Slider,
         },
         data(){
             return {
-                key:true,
+                page:true,
                 a:true,
+                box:false,
+                box1:false,
+                btn:false,
                 q:"",
                 q1:"请拖动滑块完成验证",
                 q2:"",
-                f_left:"手机验证登录",
-                f_left1:"手机快捷注册",
-                f_left2:"手机验证登录",
-                
-                f_right:"账户密码登录",
-                f_right1:"已有账号？<i style='color: #fe4320;font-style: normal' data-id='10'>请登录</i>",
-                f_right2:"账户密码登录",
-
+                yzm2:"",
                 show: true,
+                show2:true,
                 ac:1,
-                ab:1,
-                w:false,
-
                 telphone:"",
                 yanzhengma:"",
                 dxyzm:"",
-
                 tel:"",
                 tel1:"手机号码不能为空",
                 tel2:"手机号码格式不正确",
                 tel3:"",
-
                 yzm:"",
                 yzm1:"验证码不能为空",
-                yzm2:"",
-                
+                yzm2:"",        
                 duanxin:"",
                 duanxin1:"请输入短信验证码",
-                duanxin2:"",
-                
+                duanxin2:"",          
                 usename:"",
                 password:"",
                 id:"",
                 id1:"用户名不能为空",
                 id2:"用户名格式不正确",
                 id3:"",
-
                 pwd:"",    
                 pwd1:"密码不能为空",
                 pwd2:"",
-                
                 timer:null,
+                timer2:null,
                 count:"",
-
-                huakuai:true,
-
-                mystyle2: {
-                    color:"black"
-                },
+                count2:"",
                 mystyle :{
                     color: "#fe4320"
                 }
@@ -163,60 +193,41 @@ import { constants } from 'os';
         },
         methods: {
             click: function(e){
-                if(e.srcElement.dataset.id==10){
-                    this.key=true
-                    this.huakuai=true
-                    this.f_right=this.f_right2
-                     this.f_left=this.f_left2
-                    if(this.ac==1){
-                        this.ac=1
-                        this.ab=1
-                    }else if(this.ac==2){
-                        this.ac=2
-                        this.ab=1
-                    }         
-                }
-                if(this.key){
-                    if(e.srcElement.dataset.id==1){
-                        this.ac=e.srcElement.dataset.id
-                    }else if(e.srcElement.dataset.id==2) {
-                        this.ac=e.srcElement.dataset.id
-                    }
-                }
                 console.log(e.srcElement.dataset.id)
-                
+                if(e.srcElement.dataset.id==1){
+                    this.ac=e.srcElement.dataset.id
+                }else if(e.srcElement.dataset.id==2) {
+                    this.ac=e.srcElement.dataset.id
+                }
                
             },
             yanzheng: function () {
                 if(this.telphone==""){
                     this.tel=this.tel1
-                    return; 
                 }else if(!(/^1[34578]\d{9}$/.test(this.telphone))){ 
                     this.tel=this.tel2 
-                    return; 
-                }
-
-                if(this.w==false){
-                    this.q=this.q1
-                    return ;
-                }
-
-                if(this.yanzhengma==""){
-                    this.yzm=this.yzm1;
-                  
+                }else if(this.yanzhengma==""){
+                    this.yzm=this.yzm1;      
                 }else if(this.yanzhengma!="zzzz"){
                     alert("验证码错误，请重新输入")
                     this.yanzhengma="";
-                  
                 }else if(this.yanzhengma=="zzzz"){
                     //发送验证码
                       this.getCode()
+                } 
+            },
+            yanzheng2:function(){
+                if(this.telphone==""){
+                    this.tel=this.tel1
+                }else if(!(/^1[34578]\d{9}$/.test(this.telphone))){ 
+                    this.tel=this.tel2 
+                }else if(this.btn==false){
+                    this.q=this.q1;
+                }else {
+                     //发送验证码
+                    this.getCode2()
                 }
-                
-
                
-
-                
             },
             getCode(){
                  const TIME_COUNT = 120;
@@ -234,41 +245,55 @@ import { constants } from 'os';
                    }, 1000)
                   }
              },
+            getCode2(){
+                 const TIME_COUNT = 120;
+                 if (!this.timer2) {
+                   this.count2 = TIME_COUNT;
+                    this.show2 = false;
+                    this.timer2 = setInterval(() => {
+                    if (this.count2 > 0 && this.count2 <= TIME_COUNT) {
+                     this.count2--;
+                    } else {
+                        this.show2 = true;
+                     clearInterval(this.timer2);
+                     this.timer2 = null;
+                    }
+                   }, 1000)
+                  }
+             },
             login: function(){
                 if(this.ac==1){
                         if(this.telphone==""){
                             this.tel=this.tel1
-                            return ;
                         }else if(!(/^1[34578]\d{9}$/.test(this.telphone))){ 
                             this.tel=this.tel2 
-                            return ; 
                         }else if(this.dxyzm==""){
                             this.duanxin=this.duanxin1
-                            return ;
                         }else if(this.dxyzm!="zzzz"){
                             alert("手机验证码错误")
-                            return ;
                         }else {
                              //跳转
                         }
                 }else if(this.ac==2){
                     if(this.usename==""){
                             this.id=this.id1
-                            return ;
                         }else if(!(/^1[34578]\d{9}$/.test(this.usename))){ 
                             this.id=this.id2 
-                            return ; 
                         }else if(this.password==""){
                             this.pwd=this.pwd1
-                            return ;
                         }else if(!(/^[0-9A-Za-z]{6,20}$/.test(this.password))){
                             alert("密码只能是6-30位英文、数字及“_”、“-”组成")
-                            return ;
                         }else {
                             //跳转
                         }
                 }
               
+            },
+            return1:function(){
+                this.page=true
+            },
+            reg:function(){
+                this.page=false
             },
             change: function(){
                 this.tel=this.tel3;
@@ -277,19 +302,19 @@ import { constants } from 'os';
                 this.id=this.id3;
                 this.pwd=this.pwd2;
             },
-            reg: function(){
-                this.f_left=this.f_left1
-                this.f_right=this.f_right1
-                this.huakuai=false
-                this.key=false
-                this.ac=1
-                this.ab=2
-                this.telphone="",
-                this.yanzhengma="",
-                this.dxyzm=""
-                
+            change2:function(e){
+                this.box=true
+                this.q=this.q2
+                this.btn=true
+            },
+            tijiao:function(){
+                if(this.yzm2!="zzzz"){
+                    this.box1=true
+                }else {
+                    this.box=false
+
+                }
             }
-         
         }
 	}
 </script>
@@ -414,6 +439,7 @@ import { constants } from 'os';
         height: 30px;
     }
     .code_btn {
+        outline: none;
         border: none;
         width: 90px;
         height: 30px;
@@ -492,5 +518,51 @@ import { constants } from 'os';
         width: 280px;
         margin-top: 12px;
         justify-content: start;
+    }
+    .abso {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: white
+    }
+    .boxchild {
+        width:252px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+    }
+    .left {
+        width: 206px;
+        height: 34px;
+        background-color: #7AC23C;
+        font-size: 12px;
+        color: white;
+        text-align: left;
+        line-height: 34px;
+        text-indent: 10px
+    }
+    .right {
+        width: 42px;
+        height: 32px;
+        border: 1px solid #CCCCCC;
+        text-align: center
+    }
+    .yanzhen {
+        width: 248px;
+        padding-bottom: 15px;
+        border: 1px solid #ccc;
+        margin-top: 1px;
+        text-align: center
+        
+    }
+   .bb {
+        margin: 0 auto;
+        cursor: pointer;
+        background-color: #fc461e;
+        width: 120px;
+        height: 32px;
+        line-height: 32px;
+        color: #fff;
+        text-align: center;
     }
 </style>
