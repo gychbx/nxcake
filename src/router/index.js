@@ -9,11 +9,11 @@ import MyGift from '@/components/MyGift'
 import Myaha from '@/components/Myaha'
 import Reg2 from '@/components/Reg2'
 import Shouye from '@/components/Shouye'
-import Caigou from '@/components/Caigou'
-import Kehu from '@/components/Kehu'
-import Fuli from '@/components/Fuli'
-import Hezuo from '@/components/Hezuo'
-import Smallfood from '@/components/Smallfood'
+import Contentcaigou from '@/components/Contentcaigou'
+import Client from '@/components/Client'
+import Weal from '@/components/Weal'
+import Cooperate from '@/components/Cooperate'
+import Food from '@/components/Food'
 import Back from '@/components/Back'
 
 export default new Router({
@@ -54,6 +54,34 @@ export default new Router({
               component:Myaha
             },
             {
+              path:'/contentcaigou',
+              name:'Contentcaigou',
+              component:Contentcaigou
+            },
+            {
+              path:'/client',
+              name:'Client',
+              component:Client,
+           
+            },
+            {
+              path:'/weal',
+              name:'Weal',
+              component:Weal,
+           
+            },
+            {
+              path:'/cooperate',
+              name:'Cooperate',
+              component:Cooperate,
+            },
+            {
+              path:'/food',
+              name:'Food',
+              component:Food,
+           
+            },
+            {
               path:'/company',
               name:'MyHome',
               component:MyHome,
@@ -70,27 +98,6 @@ export default new Router({
         path:'/reg2',
         name:'Reg2',
         component:Reg2
-      }, {
-
-        path:'/caigou',
-        name:'Caigou',
-        component:Caigou
-      },{
-        path:'/kehu',
-        name:'Kehu',
-        component:Kehu
-      },{
-        path:'/fuli',
-        name:'Fuli',
-        component:Fuli
-      },{
-        path:'/hezuo',
-        name:'Hezuo',
-        component:Hezuo
-      },{
-        path:'/smallfood',
-        name:'Smallfood',
-        component:Smallfood
       },{
         path:'/back',
         name:'Back',

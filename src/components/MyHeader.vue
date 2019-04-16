@@ -116,15 +116,15 @@ export default {
     },
     tonewpage2:function(index){
           if(index===0){
-            this.$router.push('/caigou');
+            this.$router.push('/contentcaigou');
           }else if(index==1){
-            this.$router.push('/kehu');
+            this.$router.push('/client');
           }else if(index==2){
-            this.$router.push('/fuli');
+            this.$router.push('/weal');
           }else if(index==3){
-            this.$router.push('/hezuo');
+            this.$router.push('/cooperate');
           }else if(index==4){
-            this.$router.push('/smallfood');
+            this.$router.push('/food');
           }
     }
   },
