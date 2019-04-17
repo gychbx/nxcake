@@ -78,6 +78,12 @@ export default {
                 name:" 巧克力吐司（整条）",
                 num:"1个（整条装）",
                 price:78
+            },
+            {
+                imgurl:"http://imagecdn.lapetit.cn/postsystem/docroot/images/goods/201807/17085/list_17085.jpg",
+                name:" 巧克力吐司（整条）",
+                num:"1个（整条装）",
+                price:78
             }
         ],
         buyruletitle:"小食盒购买规则",
@@ -151,9 +157,9 @@ a {
     position: relative;
     top: 0;
 }
-.productinfo:hover div{
+.productsmall:hover div{
     top:-42px;
-    transition: 200ms;
+    transition: 250ms;
 } 
 .productsmall img{
     margin-bottom: 15px;
