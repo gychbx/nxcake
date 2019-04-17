@@ -114,8 +114,8 @@ export default {
     width: 73.6%;
     margin: 0 auto;
     background-color: #FAF1E0;
-    position: relative;
-    top:109px;
+    /* position: relative; */
+    /* top:109px; */
     /* z-index: -1; */
 }
 img {

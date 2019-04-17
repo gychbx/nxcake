@@ -40,8 +40,8 @@ export default {
 .box{
     width: 100%;
     margin: 0 auto;
-    position: relative;
-    top:109px;
+    /* position: relative; */
+    /* top:109px; */
     /* z-index: -1; */
 }
 .wealImage{

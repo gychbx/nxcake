@@ -87,8 +87,8 @@ export default {
 .box{
     width: 90%;
     margin: 0 auto;
-    position: relative;
-    top:109px;
+    /* position: relative; */
+    /* top:109px; */
     /* z-index: -1; */
 }
 .img1 {
